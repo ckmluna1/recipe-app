@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     val recipeTypeId = recipeTypesHelper!!.getRecipeTypeId(position)
                     recipes = databaseHelper!!.getRecipesByType(recipeTypeId)
-                    val listAdapter = SimpleAdapter(this@MainActivity, recipes, R.layout.recipe_list, arrayOf("name", "type", "ingredients", "steps"), intArrayOf(R.id.recipeName, R.id.recipeType, R.id.recipeIngredients, R.id.recipeSteps))
+                    val listAdapter = SimpleAdapter(this@MainActivity, recipes, R.layout.recipe_list, arrayOf("name"), intArrayOf(R.id.recipeName, R.id.recipeType))
                     recipeListView!!.setAdapter(listAdapter)
                 }
             }

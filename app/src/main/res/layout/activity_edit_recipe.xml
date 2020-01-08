@@ -15,44 +15,62 @@
             android:id="@+id/editRecipeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input recipe name here" />
+            android:hint="Input recipe name here"
+            android:padding="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select recipe type here:"
+            android:padding="16dp" />
 
         <Spinner
             android:id="@+id/spinnerType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editPictureUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input picture URL here" />
+            android:hint="Input picture URL here"
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editRecipeIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lines="10"
-            android:hint="Input ingredients here" />
+            android:lines="5"
+            android:hint="Input ingredients here"
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editRecipeSteps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lines="10"
-            android:hint="Input steps here" />
+            android:lines="5"
+            android:hint="Input steps here"
+            android:padding="16dp" />
 
-        <Button
-            android:id="@+id/buttonSaveRecipe"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel" />
+            <Button
+                android:id="@+id/buttonSaveRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

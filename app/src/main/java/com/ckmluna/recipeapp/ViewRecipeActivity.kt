@@ -63,6 +63,8 @@ class ViewRecipeActivity : AppCompatActivity() {
                     this.finish()
                 }
             }
+            builder.setNegativeButton("NO") {dialog, which ->
+            }
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,18 +16,21 @@
             android:id="@+id/labelSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Filter recipes by recipe type:" />
+            android:text="Filter by type:"
+            android:padding="16dp" />
 
         <Spinner
             android:id="@+id/recipeTypesSpinner"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="16dp"/>
 
         <TextView
             android:id="@+id/labelList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recipes" />
+            android:text="Recipes:"
+            android:padding="16dp" />
 
         <ListView
             android:id="@+id/recipeListView"
@@ -45,4 +48,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

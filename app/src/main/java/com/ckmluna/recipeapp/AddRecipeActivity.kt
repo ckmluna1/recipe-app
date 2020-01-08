@@ -50,5 +50,9 @@ class AddRecipeActivity : AppCompatActivity() {
             )
             finish()
         }
+
+        buttonCancel!!.setOnClickListener {
+            finish()
+        }
     }
 }

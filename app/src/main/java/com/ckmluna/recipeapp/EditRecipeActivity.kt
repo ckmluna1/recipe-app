@@ -50,7 +50,7 @@ class EditRecipeActivity : AppCompatActivity() {
         editRecipeName!!.setText(recipeHashMap!!.get("name"))
         spinnerType!!.setSelection(recipeHashMap!!.get("type")!!.toInt()-1)
         editPictureUrl!!.setText(recipeHashMap!!.get("pictureUrl"))
-        editRecipeName!!.setText(recipeHashMap!!.get("name"))
+        editRecipeIngredients!!.setText(recipeHashMap!!.get("ingredients"))
         editRecipeSteps!!.setText(recipeHashMap!!.get("steps"))
 
         buttonSaveRecipe!!.setOnClickListener {
@@ -64,6 +64,10 @@ class EditRecipeActivity : AppCompatActivity() {
                 editRecipeIngredients!!.text.toString(),
                 editRecipeSteps!!.text.toString()
             )
+            finish()
+        }
+
+        buttonCancel!!.setOnClickListener {
             finish()
         }
     }
