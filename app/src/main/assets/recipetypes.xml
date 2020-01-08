@@ -1,43 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<recipes>
-    <recipe>
-        <name>Fried Dumpling</name>
-        <type>Asian</type>
-        <description>Filled dough cooked in oil.</description>
-    </recipe>
-    <recipe>
-        <name>Spaghetti</name>
-        <type>Italian</type>
-        <description>Long, thin pasta with meaty sauce.</description>
-    </recipe>
-    <recipe>
-        <name>Pizza</name>
-        <type>Italian</type>
-        <description>Basically a flat sandwich.</description>
-    </recipe>
-    <recipe>
-        <name>Teriyaki</name>
-        <type>Asian</type>
-        <description>Soy-sauce glazed dish.</description>
-    </recipe>
-    <recipe>
-        <name>Kebab</name>
-        <type>Mediterranean</type>
-        <description>Middle Eastern cooked meat.</description>
-    </recipe>
-    <recipe>
-        <name>A Little Salami</name>
-        <type>Cat Food</type>
-        <description>You can give them to your cat, but just a little.</description>
-    </recipe>
-    <recipe>
-        <name>Catnip</name>
-        <type>Catfood</type>
-        <description>For good times.</description>
-    </recipe>
-    <recipe>
-        <name>Tuna</name>
-        <type>Food for Cats</type>
-        <description>Cats eat this.</description>
-    </recipe>
-</recipes>
+<recipetypes>
+    <recipetype>
+        <id>1</id>
+        <name>Italian</name>
+    </recipetype>
+    <recipetype>
+        <id>2</id>
+        <name>French</name>
+    </recipetype>
+    <recipetype>
+        <id>3</id>
+        <name>Japanese</name>
+    </recipetype>
+    <recipetype>
+        <id>4</id>
+        <name>Chinese</name>
+    </recipetype>
+    <recipetype>
+        <id>5</id>
+        <name>Filipino</name>
+    </recipetype>
+</recipetypes>

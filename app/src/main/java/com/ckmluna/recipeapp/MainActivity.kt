@@ -2,63 +2,79 @@ package com.ckmluna.recipeapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ListView
-import android.widget.SimpleAdapter
+import android.content.Intent
+import android.view.View
+import android.widget.*
 import org.w3c.dom.Element
 import org.w3c.dom.Node
-import org.xml.sax.SAXException
-import java.io.IOException
 import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.parsers.ParserConfigurationException
 
 class MainActivity : AppCompatActivity() {
-    var recipeDataHashMap = HashMap<String, String>()
-    var recipes: ArrayList<HashMap<String, String>> = ArrayList()
+    private var databaseHelper: DatabaseHelper? = null
+    private var recipeTypesHelper: RecipeTypesHelper? = null
+
+    private var recipeTypesSpinner: Spinner? = null
+    private var recipeListView: ListView? = null
+    private var addRecipeFab: View? = null
+
+    private var recipeTypes: ArrayList<String> = ArrayList()
+    private var recipes: ArrayList<HashMap<String, String>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        try {
-            val listView = findViewById<ListView>(R.id.recipeListView)
-            val istream = assets.open("recipetypes.xml")
-            val builderFactory = DocumentBuilderFactory.newInstance()
-            val docBuilder = builderFactory.newDocumentBuilder()
-            val doc = docBuilder.parse(istream)
 
-            val recipeList = doc.getElementsByTagName("recipe")
-            for (i in 0 until recipeList.getLength()) {
-                if (recipeList.item(0).getNodeType().equals(Node.ELEMENT_NODE) ) {
-                    //creating instance of HashMap to put the data of node value
-                    recipeDataHashMap = HashMap()
-                    val element = recipeList.item(i) as Element
-                    recipeDataHashMap.put("name", getNodeValue("name", element))
-                    recipeDataHashMap.put("type", getNodeValue("type", element))
-                    recipeDataHashMap.put("description", getNodeValue("description", element))
-                    //adding the HashMap data to ArrayList
-                    recipes.add(recipeDataHashMap)
+        databaseHelper = DatabaseHelper(this)
+        recipeTypesHelper = RecipeTypesHelper(this)
+
+        recipeTypesSpinner = findViewById<Spinner>(R.id.recipeTypesSpinner);
+        recipeListView = findViewById<ListView>(R.id.recipeListView)
+        addRecipeFab = findViewById(R.id.addRecipeFab);
+
+        try {
+            recipeTypes = this.recipeTypesHelper!!.recipeTypeNames
+            val adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, this.recipeTypes)
+            recipeTypesSpinner!!.setAdapter(adapter)
+
+            populateList()
+
+            addRecipeFab!!.setOnClickListener { view ->
+                val intent = Intent(this, AddRecipeActivity::class.java)
+                startActivity(intent)
+            }
+
+            recipeTypesSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val recipeTypeId = recipeTypesHelper!!.getRecipeTypeId(position)
+                    recipes = databaseHelper!!.getRecipesByType(recipeTypeId)
+                    val listAdapter = SimpleAdapter(this@MainActivity, recipes, R.layout.recipe_list, arrayOf("name", "type", "ingredients", "steps"), intArrayOf(R.id.recipeName, R.id.recipeType, R.id.recipeIngredients, R.id.recipeSteps))
+                    recipeListView!!.setAdapter(listAdapter)
                 }
             }
-            val adapter = SimpleAdapter(this@MainActivity, recipes, R.layout.recipe_list, arrayOf("name", "type", "description"), intArrayOf(R.id.recipeName, R.id.recipeType, R.id.recipeDescription))
-            listView.setAdapter(adapter)
         } catch(e: Exception) {
 
         }
     }
 
-    // function to return node value
-    protected fun getNodeValue(tag: String, element: Element): String {
-        val nodeList = element.getElementsByTagName(tag)
-        val node = nodeList.item(0)
-        if (node != null) {
-            if (node.hasChildNodes()) {
-                val child = node.getFirstChild()
-                while (child != null) {
-                    if (child.getNodeType() === Node.TEXT_NODE) {
-                        return child.getNodeValue()
-                    }
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        populateList()
+    }
+
+    fun populateList() {
+        databaseHelper!!.getWritableDatabase();
+        recipes = databaseHelper!!.allRecipes
+        val listAdapter = SimpleAdapter(this@MainActivity, recipes, R.layout.recipe_list, arrayOf("name", "type", "ingredients", "steps"), intArrayOf(R.id.recipeName, R.id.recipeType, R.id.recipeIngredients, R.id.recipeSteps))
+        recipeListView!!.setAdapter(listAdapter)
+
+        recipeListView!!.setOnItemClickListener { parent, view, position, id ->
+            val element = listAdapter.getItem(position) // The item that was clicked
+            val intent = Intent(this, ViewRecipeActivity::class.java)
+            intent.putExtra("recipeId", recipes[position].get("id"))
+            startActivity(intent)
         }
-        return ""
     }
 }
