@@ -26,7 +26,7 @@ class RecipeTypesHelper(context: Context) {
         }
     }
 
-    // function to return node value
+    // Function to return node value
     protected fun getNodeValue(tag: String, element: Element): String {
         val nodeList = element.getElementsByTagName(tag)
         val node = nodeList.item(0)

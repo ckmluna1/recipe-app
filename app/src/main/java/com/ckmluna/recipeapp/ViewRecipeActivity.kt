@@ -2,16 +2,11 @@ package com.ckmluna.recipeapp
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import android.view.View
 import com.bumptech.glide.Glide
-import java.lang.Exception
-import java.net.URL
-import java.net.URLConnection
 
 class ViewRecipeActivity : AppCompatActivity() {
     private var databaseHelper: DatabaseHelper? = null
@@ -76,6 +71,7 @@ class ViewRecipeActivity : AppCompatActivity() {
         populateView()
     }
 
+    //    To display recipe details
     fun populateView() {
         recipeHashMap = databaseHelper!!.getRecipeById(recipeId)
 
